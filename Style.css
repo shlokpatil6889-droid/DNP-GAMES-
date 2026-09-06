@@ -1,0 +1,500 @@
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    background:#080812;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* SPLASH */
+
+#splash{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at 50% 55%,#24205f 0%,#0c0c22 38%,#070710 75%);
+}
+
+.splash-box{
+    width:100%;
+    text-align:center;
+}
+
+.logo{
+    font-size:clamp(42px,12vw,78px);
+    font-weight:900;
+    letter-spacing:3px;
+}
+
+.logo span{
+    color:#fff;
+}
+
+.logo{
+    color:#816cff;
+}
+
+.made{
+    margin-top:25px;
+    color:#ddd;
+    font-size:16px;
+    letter-spacing:7px;
+}
+
+.loader{
+    width:86px;
+    height:86px;
+    margin:50px auto 0;
+    border:5px solid rgba(255,255,255,.15);
+    border-top-color:#866fff;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+/* APP */
+
+#app{
+    display:none;
+    min-height:100vh;
+    padding-bottom:85px;
+    background:
+        radial-gradient(circle at 50% 0%,#15143b 0%,#080812 45%);
+}
+
+/* HEADER */
+
+.topbar{
+    height:65px;
+    padding:0 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.07);
+    background:rgba(8,8,18,.92);
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(12px);
+}
+
+.brand{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.brand-dnp{
+    color:#fff;
+}
+
+.icon-btn{
+    border:0;
+    background:#17172a;
+    color:white;
+    width:43px;
+    height:43px;
+    border-radius:14px;
+    font-size:28px;
+}
+
+/* SEARCH */
+
+.search-box{
+    display:none;
+    padding:12px 16px;
+    background:#0b0b17;
+}
+
+.search-box.show{
+    display:block;
+}
+
+.search-box input{
+    width:100%;
+    height:48px;
+    border:none;
+    outline:none;
+    border-radius:15px;
+    padding:0 16px;
+    background:#18182a;
+    color:white;
+    font-size:16px;
+}
+
+/* PAGES */
+
+.page{
+    padding:18px;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* HERO */
+
+.hero{
+    margin-top:5px;
+    padding:28px 22px;
+    border-radius:25px;
+    background:
+        linear-gradient(135deg,#201c58,#151334 60%,#10101e);
+    border:1px solid rgba(132,111,255,.2);
+    box-shadow:0 15px 45px rgba(0,0,0,.35);
+}
+
+.hero-small{
+    color:#9589ff;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+.hero h1{
+    margin-top:8px;
+    font-size:36px;
+}
+
+.hero p{
+    margin-top:8px;
+    color:#aaaabe;
+}
+
+/* TITLES */
+
+.section-title{
+    margin:28px 2px 15px;
+    font-size:22px;
+}
+
+/* GAME GRID */
+
+.game-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.game-card{
+    min-height:190px;
+    padding:14px;
+    border-radius:22px;
+    background:linear-gradient(145deg,#18182a,#10101c);
+    border:1px solid rgba(255,255,255,.07);
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    cursor:pointer;
+    transition:.15s;
+    user-select:none;
+}
+
+.game-card:active{
+    transform:scale(.96);
+}
+
+.game-icon{
+    height:105px;
+    border-radius:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:52px;
+    background:linear-gradient(135deg,#28226e,#171638);
+}
+
+.game-card h3{
+    margin-top:11px;
+    font-size:16px;
+}
+
+.game-card p{
+    margin-top:4px;
+    color:#88889f;
+    font-size:12px;
+}
+
+/* GAME HEADER */
+
+.game-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:15px;
+}
+
+.back-btn{
+    border:0;
+    color:#fff;
+    background:#19192c;
+    padding:11px 15px;
+    border-radius:13px;
+    font-size:15px;
+}
+
+#gameTitle{
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* GAME AREA */
+
+.game-area{
+    min-height:520px;
+    border-radius:24px;
+    background:#10101d;
+    border:1px solid rgba(255,255,255,.07);
+    padding:18px;
+    position:relative;
+    overflow:hidden;
+}
+
+/* COMMON GAME */
+
+.game-inner{
+    text-align:center;
+}
+
+.game-inner h2{
+    font-size:28px;
+    margin:10px 0;
+}
+
+.game-inner p{
+    color:#a1a1b6;
+    margin:8px 0 18px;
+}
+
+.game-btn{
+    border:0;
+    background:linear-gradient(135deg,#7b68ff,#5141d9);
+    color:#fff;
+    font-size:17px;
+    font-weight:bold;
+    padding:14px 25px;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(99,82,255,.25);
+}
+
+.score{
+    font-size:20px;
+    font-weight:bold;
+    margin:12px;
+}
+
+.game-canvas{
+    width:100%;
+    height:390px;
+    background:#080812;
+    border-radius:18px;
+    position:relative;
+    overflow:hidden;
+    touch-action:none;
+}
+
+/* TARGET */
+
+.target{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    position:absolute;
+    background:#ff477e;
+    border:7px solid #fff;
+    box-shadow:0 0 20px rgba(255,71,126,.5);
+}
+
+/* CATCH */
+
+.catch-ball{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    position:absolute;
+    background:#55d6ff;
+    box-shadow:0 0 25px rgba(85,214,255,.6);
+}
+
+/* REACTION */
+
+.reaction-box{
+    height:330px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#25253a;
+    font-size:24px;
+    font-weight:bold;
+    user-select:none;
+    touch-action:manipulation;
+}
+
+/* DODGE */
+
+.dodge-player{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:#7e6cff;
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.enemy{
+    width:35px;
+    height:35px;
+    border-radius:10px;
+    background:#ff4f70;
+    position:absolute;
+}
+
+/* MATH */
+
+.question{
+    font-size:38px;
+    font-weight:bold;
+    margin:35px 0;
+}
+
+.answers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.answer{
+    border:0;
+    border-radius:15px;
+    background:#1d1d32;
+    color:white;
+    padding:17px;
+    font-size:20px;
+}
+
+/* GUESS */
+
+.guess-input{
+    width:100%;
+    height:55px;
+    border:0;
+    outline:none;
+    border-radius:15px;
+    background:#1d1d30;
+    color:white;
+    text-align:center;
+    font-size:22px;
+    margin:20px 0 12px;
+}
+
+/* MEMORY */
+
+.memory-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
+    max-width:330px;
+    margin:25px auto;
+}
+
+.memory-card{
+    aspect-ratio:1;
+    border:0;
+    border-radius:12px;
+    background:#22223a;
+    color:white;
+    font-size:25px;
+}
+
+.memory-card.open{
+    background:#5748c7;
+}
+
+/* TAP */
+
+.tap-zone{
+    height:350px;
+    border-radius:20px;
+    background:#17172b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    font-weight:900;
+    touch-action:manipulation;
+    user-select:none;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:72px;
+    background:rgba(12,12,23,.96);
+    border-top:1px solid rgba(255,255,255,.08);
+    display:flex;
+    justify-content:center;
+    gap:70px;
+    z-index:100;
+    backdrop-filter:blur(15px);
+}
+
+.nav-item{
+    width:80px;
+    border:0;
+    background:none;
+    color:#77778e;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+}
+
+.nav-item span{
+    font-size:25px;
+}
+
+.nav-item small{
+    font-size:11px;
+}
+
+.nav-item.active{
+    color:#8b79ff;
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+    .game-grid{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .page{
+        max-width:1100px;
+        margin:auto;
+    }
+}

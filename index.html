@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1,
+      maximum-scale=1,
+      user-scalable=no">
+
+<title>DNP GAMES</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    background:#080812;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* ================= SPLASH ================= */
+
+#splash{
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+    radial-gradient(
+        circle at 50% 50%,
+        #252064 0%,
+        #11102d 35%,
+        #080812 75%
+    );
+}
+
+.splashContent{
+    width:88%;
+    max-width:600px;
+    text-align:center;
+}
+
+.logo{
+    font-size:clamp(42px,12vw,76px);
+    font-weight:900;
+    letter-spacing:3px;
+    white-space:nowrap;
+}
+
+.logo .white{
+    color:white;
+}
+
+.logo .purple{
+    color:#806cff;
+}
+
+.made{
+    margin-top:22px;
+    font-size:14px;
+    letter-spacing:6px;
+    color:#ddd;
+}
+
+/* NUMBER */
+
+.percent{
+    margin-top:45px;
+    font-size:22px;
+    font-weight:bold;
+    color:#ffffff;
+}
+
+/* PROGRESS */
+
+.progressWrap{
+    width:100%;
+    height:7px;
+    margin-top:15px;
+    border-radius:20px;
+    background:rgba(255,255,255,.15);
+    overflow:hidden;
+}
+
+.progress{
+    width:0%;
+    height:100%;
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #5d4bff,
+        #a394ff
+    );
+
+    box-shadow:
+    0 0 15px rgba(128,108,255,.8);
+
+    transition:width .08s linear;
+}
+
+/* ================= APP ================= */
+
+#app{
+    display:none;
+    min-height:100vh;
+    padding-bottom:80px;
+
+    background:
+    radial-gradient(
+        circle at 50% 0%,
+        #17163d 0%,
+        #080812 48%
+    );
+}
+
+/* HEADER */
+
+header{
+    height:65px;
+    padding:0 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    position:sticky;
+    top:0;
+    z-index:50;
+
+    background:rgba(8,8,18,.95);
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.brand{
+    font-size:22px;
+    font-weight:900;
+}
+
+.brand span{
+    color:#806cff;
+}
+
+.searchBtn{
+    width:44px;
+    height:44px;
+    border:0;
+    border-radius:14px;
+
+    background:#19192c;
+    color:white;
+
+    font-size:26px;
+}
+
+/* SEARCH */
+
+#search{
+    display:none;
+    padding:12px 16px;
+    background:#0c0c18;
+}
+
+#search.show{
+    display:block;
+}
+
+#search input{
+    width:100%;
+    height:48px;
+
+    border:0;
+    outline:0;
+    border-radius:15px;
+
+    padding:0 16px;
+
+    background:#19192c;
+    color:white;
+
+    font-size:16px;
+}
+
+/* PAGE */
+
+.page{
+    padding:18px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* HERO */
+
+.hero{
+    padding:30px 22px;
+
+    border-radius:24px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #211d5b,
+        #121225
+    );
+
+    border:1px solid rgba(128,108,255,.25);
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.3);
+}
+
+.hero small{
+    color:#9082ff;
+    letter-spacing:3px;
+}
+
+.hero h1{
+    margin-top:8px;
+    font-size:38px;
+}
+
+.hero p{
+    margin-top:8px;
+    color:#aaaabe;
+}
+
+.section{
+    margin:28px 2px 15px;
+    font-size:22px;
+}
+
+/* GAME GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.card{
+    min-height:185px;
+    padding:12px;
+
+    border-radius:21px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #19192c,
+        #10101c
+    );
+
+    border:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.25);
+
+    cursor:pointer;
+}
+
+.card:active{
+    transform:scale(.97);
+}
+
+.gameIcon{
+    height:105px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:17px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2b2671,
+        #171734
+    );
+
+    font-size:50px;
+}
+
+.card h3{
+    margin-top:11px;
+    font-size:16px;
+}
+
+.card p{
+    margin-top:5px;
+    font-size:12px;
+    color:#88889f;
+}
+
+/* GAME */
+
+.gameHead{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.back{
+    border:0;
+    border-radius:12px;
+    padding:11px 15px;
+
+    background:#19192c;
+    color:white;
+}
+
+#gameTitle{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.gameBox{
+    min-height:520px;
+
+    padding:18px;
+
+    border-radius:23px;
+
+    background:#10101d;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    overflow:hidden;
+
+    text-align:center;
+}
+
+.gameBox h2{
+    margin:8px 0 10px;
+    font-size:27px;
+}
+
+.gameBox p{
+    color:#999;
+    margin-bottom:18px;
+}
+
+.play{
+    border:0;
+    border-radius:14px;
+
+    padding:14px 23px;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #806cff,
+        #5140d5
+    );
+}
+
+/* ARENA */
+
+.arena{
+    position:relative;
+
+    width:100%;
+    height:390px;
+
+    border-radius:18px;
+
+    background:#080812;
+
+    overflow:hidden;
+
+    touch-action:none;
+}
+
+.target{
+    position:absolute;
+
+    width:60px;
+    height:60px;
+
+    border-radius:50%;
+
+    background:#ff477e;
+
+    border:6px solid white;
+}
+
+.ball{
+    position:absolute;
+
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    background:#54d9ff;
+
+    box-shadow:
+    0 0 20px #54d9ff;
+}
+
+.reaction{
+    height:330px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:#29293d;
+
+    font-size:24px;
+    font-weight:bold;
+}
+
+.tap{
+    height:350px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:#18182b;
+
+    font-size:42px;
+    font-weight:900;
+
+    touch-action:manipulation;
+}
+
+.guess{
+    width:100%;
+    height:52px;
+
+    border:0;
+    outline:0;
+
+    border-radius:14px;
+
+    background:#1c1c30;
+    color:white;
+
+    text-align:center;
+
+    font-size:21px;
+
+    margin-bottom:12px;
+}
+
+.answers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.answer{
+    border:0;
+    border-radius:14px;
+
+    padding:17px;
+
+    color:white;
+    background:#1d1d32;
+}
+
+.memory{
+    max-width:330px;
+    margin:20px auto;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+}
+
+.memory button{
+    aspect-ratio:1;
+
+    border:0;
+    border-radius:11px;
+
+    background:#24243b;
+    color:white;
+
+    font-size:24px;
+}
+
+.player{
+    position:absolute;
+
+    width:45px;
+    height:45px;
+
+    background:#806cff;
+
+    border-radius:12px;
+
+    bottom:20px;
+    left:50%;
+
+    transform:translateX(-50%);
+}
+
+.enemy{
+    position:absolute;
+
+    width:35px;
+    height:35px;
+
+    background:#ff466b;
+
+    border-radius:9px;
+}
+
+.bottom{
+    position:fixed;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:70px;
+
+    z-index:100;
+
+    display:flex;
+    justify-content:center;
+    gap:70px;
+
+    background:#0d0d19;
+
+    border-top:1px solid #24243a;
+}
+
+.nav{
+    width:80px;
+
+    border:0;
+    background:none;
+
+    color:#777;
+}
+
+.nav.active{
+    color:#806cff;
+}
+
+.nav div{
+    font-size:24px;
+}
+
+.nav small{
+    font-size:11px;
+}
+
+@media(min-width:700px){
+
+    .page{
+        max-width:1100px;
+        margin:auto;
+    }
+
+    .grid{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= SPLASH ================= -->
+
+<div id="splash">
+
+    <div class="splashContent">
+
+        <div class="logo">
+            <span class="white">DNP</span>
+            <span class="purple"> GAMES</span>
+        </div>
+
+        <div class="made">
+            MADE BY DISHANT
+        </div>
+
+        <div class="percent" id="percent">
+            1%
+        </div>
+
+        <div class="progressWrap">
+            <div class="progress" id="progress"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= APP ================= -->
+
+<div id="app">
+
+<header>
+
+    <div class="brand">
+        <span>DNP</span> GAMES
+    </div>
+
+    <button class="searchBtn" id="searchBtn">
+        ⌕
+    </button>
+
+</header>
+
+
+<div id="search">
+
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="Search games..."
+    >
+
+</div>
+
+
+<!-- HOME -->
+
+<div id="home" class="page">
+
+    <div class="hero">
+
+        <small>WELCOME TO</small>
+
+        <h1>DNP GAMES</h1>
+
+        <p>
+            Play fun games instantly 🎮
+        </p>
+
+    </div>
+
+    <h2 class="section">
+        🔥 Popular Games
+    </h2>
+
+    <div class="grid" id="grid"></div>
+
+</div>
+
+
+<!-- GAME PAGE -->
+
+<div id="gamePage" class="page hidden">
+
+    <div class="gameHead">
+
+        <button class="back" id="back">
+            ← Back
+        </button>
+
+        <div id="gameTitle">
+            Game
+        </div>
+
+    </div>
+
+    <div class="gameBox" id="gameBox"></div>
+
+</div>
+
+
+<!-- BOTTOM -->
+
+<div class="bottom">
+
+    <button class="nav active" id="homeNav">
+
+        <div>⌂</div>
+        <small>Home</small>
+
+    </button>
+
+    <button class="nav" id="gamesNav">
+
+        <div>🎮</div>
+        <small>Games</small>
+
+    </button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DNP GAMES - STARTUP
+   ===================================================== */
+
+(function(){
+
+"use strict";
+
+
+/* -------- SPLASH PROGRESS -------- */
+
+var percent = document.getElementById("percent");
+var progress = document.getElementById("progress");
+var splash = document.getElementById("splash");
+var app = document.getElementById("app");
+
+var number = 1;
+
+var loading = setInterval(function(){
+
+    percent.textContent = number + "%";
+    progress.style.width = number + "%";
+
+    number++;
+
+    if(number > 100){
+
+        clearInterval(loading);
+
+        setTimeout(function(){
+
+            splash.style.display = "none";
+            app.style.display = "block";
+
+            showGames(games);
+
+        },250);
+
+    }
+
+},25);
+
+
+/* =====================================================
+   GAME LIST
+   ===================================================== */
+
+var games=[
+
+    {
+        id:"target",
+        name:"Target Tap",
+        icon:"🎯",
+        desc:"Hit the targets"
+    },
+
+    {
+        id:"catch",
+        name:"Catch Ball",
+        icon:"⚡",
+        desc:"Catch the balls"
+    },
+
+    {
+        id:"reaction",
+        name:"Reaction Test",
+        icon:"🧠",
+        desc:"Test your speed"
+    },
+
+    {
+        id:"dodge",
+        name:"Dodge",
+        icon:"🔥",
+        desc:"Avoid enemies"
+    },
+
+    {
+        id:"math",
+        name:"Math Rush",
+        icon:"➗",
+        desc:"Solve quickly"
+    },
+
+    {
+        id:"guess",
+        name:"Guess Number",
+        icon:"🔢",
+        desc:"Guess 1 to 100"
+    },
+
+    {
+        id:"memory",
+        name:"Memory",
+        icon:"🃏",
+        desc:"Match the cards"
+    },
+
+    {
+        id:"tap",
+        name:"Tap Fast",
+        icon:"👆",
+        desc:"Tap as fast as possible"
+    }
+
+];
+
+
+var grid=document.getElementById("grid");
+var home=document.getElementById("home");
+var gamePage=document.getElementById("gamePage");
+var gameBox=document.getElementById("gameBox");
+var gameTitle=document.getElementById("gameTitle");
+
+var activeCleanup=null;
+
+
+/* =====================================================
+   SHOW GAMES
+   ===================================================== */
+
+function showGames(list){
+
+    grid.innerHTML="";
+
+    if(list.length===0){
+
+        grid.innerHTML=
+        '<div style="grid-column:1/-1;text-align:center;padding:50px;color:#888;">No game found 😔</div>';
+
+        return;
+    }
+
+    list.forEach(function(g){
+
+        var card=document.createElement("div");
+
+        card.className="card";
+
+        card.innerHTML=
+            '<div class="gameIcon">'+g.icon+'</div>'+
+            '<h3>'+g.name+'</h3>'+
+            '<p>'+g.desc+'</p>';
+
+        card.onclick=function(){
+
+            openGame(g);
+
+        };
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   OPEN GAME
+   ===================================================== */
+
+function openGame(g){
+
+    if(activeCleanup){
+
+        try{
+            activeCleanup();
+        }catch(e){}
+
+        activeCleanup=null;
+    }
+
+    home.classList.add("hidden");
+    gamePage.classList.remove("hidden");
+
+    gameTitle.textContent=g.name;
+
+    if(g.id==="target")
+        activeCleanup=targetGame();
+
+    if(g.id==="catch")
+        activeCleanup=catchGame();
+
+    if(g.id==="reaction")
+        activeCleanup=reactionGame();
+
+    if(g.id==="dodge")
+        activeCleanup=dodgeGame();
+
+    if(g.id==="math")
+        activeCleanup=mathGame();
+
+    if(g.id==="guess")
+        activeCleanup=guessGame();
+
+    if(g.id==="memory")
+        activeCleanup=memoryGame();
+
+    if(g.id==="tap")
+        activeCleanup=tapGame();
+
+}
+
+
+/* =====================================================
+   HOME
+   ===================================================== */
+
+function goHome(){
+
+    if(activeCleanup){
+
+        try{
+            activeCleanup();
+        }catch(e){}
+
+        activeCleanup=null;
+    }
+
+    gamePage.classList.add("hidden");
+    home.classList.remove("hidden");
+
+    window.scrollTo(0,0);
+}
+
+
+document.getElementById("back").onclick=goHome;
+
+document.getElementById("homeNav").onclick=goHome;
+
+document.getElementById("gamesNav").onclick=goHome;
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+document.getElementById("searchBtn").onclick=function(){
+
+    var search=document.getElementById("search");
+
+    search.classList.toggle("show");
+
+    if(search.classList.contains("show")){
+
+        document.getElementById("searchInput").focus();
+
+    }
+
+};
+
+
+document.getElementById("searchInput").oninput=function(){
+
+    var value=this.value.toLowerCase();
+
+    showGames(
+
+        games.filter(function(g){
+
+            return g.name.toLowerCase().indexOf(value)!==-1;
+
+        })
+
+    );
+
+};
+
+
+/* =====================================================
+   TARGET
+   ===================================================== */
+
+function targetGame(){
+
+    var score=0;
+    var time=30;
+    var timer;
+
+    gameBox.innerHTML=
+
+        '<h2>🎯 Target Tap</h2>'+
+        '<p>Target को tap करो!</p>'+
+
+        '<div class="score">'+
+        'Score: <span id="ts">0</span> | '+
+        'Time: <span id="tt">30</span>'+
+        '</div>'+
+
+        '<div class="arena" id="targetArena"></div>';
+
+
+    var arena=document.getElementById("targetArena");
+
+
+    function spawn(){
+
+        var target=document.createElement("div");
+
+        target.className="target";
+
+        target.style.left=
+            Math.random()*(arena.clientWidth-65)+"px";
+
+        target.style.top=
+            Math.random()*(arena.clientHeight-65)+"px";
+
+
+        target.onclick=function(){
+
+            score++;
+
+            document.getElementById("ts").textContent=score;
+
+            target.remove();
+
+            spawn();
+
+        };
+
+
+        arena.appendChild(target);
+
+    }
+
+
+    spawn();
+
+
+    timer=setInterval(function(){
+
+        time--;
+
+        document.getElementById("tt").textContent=time;
+
+        if(time<=0){
+
+            clearInterval(timer);
+
+            gameBox.innerHTML=
+
+                '<h2>🎉 Time Up!</h2>'+
+                '<p>Your Score: '+score+'</p>'+
+                '<button class="play" id="again">Play Again</button>';
+
+
+            document.getElementById("again").onclick=function(){
+
+                openGame({
+                    id:"target",
+                    name:"Target Tap"
+                });
+
+            };
+
+        }
+
+    },1000);
+
+
+    return function(){
+
+        clearInterval(timer);
+
+    };
+
+}
+
+
+/* =====================================================
+   CATCH
+   ===================================================== */
+
+function catchGame(){
+
+    var score=0;
+    var time=30;
+    var timer;
+    var spawner;
+
+
+    gameBox.innerHTML=
+
+        '<h2>⚡ Catch Ball</h2>'+
+        '<p>Blue balls को tap करो!</p>'+
+
+        '<div class="score">'+
+        'Score: <span id="cs">0</span> | '+
+        'Time: <span id="ct">30</span>'+
+        '</div>'+
+
+        '<div class="arena" id="catchArena"></div>';
+
+
+    var arena=document.getElementById("catchArena");
+
+
+    function spawn(){
+
+        var ball=document.createElement("div");
+
+        ball.className="ball";
+
+        ball.style.left=
+            Math.random()*(arena.clientWidth-60)+"px";
+
+        ball.style.top=
+            Math.random()*(arena.clientHeight-60)+"px";
+
+
+        ball.onclick=function(){
+
+            score++;
+
+            document.getElementById("cs").textContent=score;
+
+            ball.remove();
+
+        };
+
+
+        arena.appendChild(ball);
+
+
+        setTimeout(function(){
+
+            if(ball.parentNode)
+                ball.remove();
+
+        },1000);
+
+    }
+
+
+    spawner=setInterval(spawn,700);
+
+
+    timer=setInterval(function(){
+
+        time--;
+
+        document.getElementById("ct").textContent=time;
+
+        if(time<=0){
+
+            clearInterval(timer);
+            clearInterval(spawner);
+
+            gameBox.innerHTML=
+
+                '<h2>⚡ Finished!</h2>'+
+                '<p>Your Score: '+score+'</p>'+
+                '<button class="play" id="again">Play Again</button>';
+
+
+            document.getElementById("again").onclick=function(){
+
+                openGame({
+                    id:"catch",
+                    name:"Catch Ball"
+                });
+
+            };
+
+        }
+
+    },1000);
+
+
+    return function(){
+
+        clearInterval(timer);
+        clearInterval(spawner);
+
+    };
+
+}
+
+
+/* =====================================================
+   REACTION
+   ===================================================== */
+
+function reactionGame(){
+
+    var timer;
+    var ready=false;
+    var start=0;
+    var stopped=false;
+
+
+    gameBox.innerHTML=
+
+        '<h2>🧠 Reaction Test</h2>'+
+        '<p>Green होते ही tap करो!</p>'+
+        '<div class="reaction" id="reaction">TAP TO START</div>';
+
+
+    var box=document.getElementById("reaction");
+
+
+    box.onclick=function(){
+
+        if(stopped)
+            return;
+
+
+        if(ready){
+
+            var ms=
+                Math.round(
+                    performance.now()-start
+                );
+
+            stopped=true;
+
+            box.innerHTML=
+                ms+
+                " ms<br><br>"+
+                '<button class="play" id="again">Try Again</button>';
+
+
+            document.getElementById("again").onclick=function(){
+
+                openGame({
+                    id:"reaction",
+                    name:"Reaction Test"
+                });
+
+            };
+
+            return;
+        }
+
+
+        box.textContent="WAIT...";
+        box.style.background="#6b263a";
+
+
+        timer=setTimeout(function(){
+
+            ready=true;
+
+            start=performance.now();
+
+            box.textContent="TAP NOW!";
+
+            box.style.background="#247548";
+
+        },1000+Math.random()*2500);
+
+    };
+
+
+    return function(){
+
+        clearTimeout(timer);
+
+    };
+
+}
+
+
+/* =====================================================
+   DODGE
+   ===================================================== */
+
+function dodgeGame(){
+
+    var running=true;
+    var score=0;
+    var enemies=[];
+    var spawn;
+    var frame;
+
+
+    gameBox.innerHTML=
+
+        '<h2>🔥 Dodge</h2>'+
+        '<p>Player को drag करके बचाओ!</p>'+
+
+        '<div class="score">'+
+        'Score: <span id="ds">0</span>'+
+        '</div>'+
+
+        '<div class="arena" id="dodgeArena">'+
+        '<div class="player" id="player"></div>'+
+        '</div>';
+
+
+    var arena=document.getElementById("dodgeArena");
+    var player=document.getElementById("player");
+
+
+    function move(e){
+
+        var rect=arena.getBoundingClientRect();
+
+        var x;
+
+        if(e.touches){
+
+            x=
+                e.touches[0].clientX-
+                rect.left;
+
+        }else{
+
+            x=
+                e.clientX-
+                rect.left;
+
+        }
+
+
+        x=
+            Math.max(
+                25,
+                Math.min(
+                    rect.width-25,
+                    x
+                )
+            );
+
+
+        player.style.left=x+"px";
+
+    }
+
+
+    arena.addEventListener(
+        "touchmove",
+        move,
+        {passive:true}
+    );
+
+    arena.addEventListener(
+        "mousemove",
+        move
+    );
+
+
+    function makeEnemy(){
+
+        if(!running)
+            return;
+
+
+        var enemy=
+            document.createElement("div");
+
+        enemy.className="enemy";
+
+        enemy.style.left=
+            Math.random()*
+            (arena.clientWidth-40)+"px";
+
+        enemy.style.top="-40px";
+
+        arena.appendChild(enemy);
+
+        enemies.push({
+            el:enemy,
+            y:-40
+        });
+
+    }
+
+
+    spawn=setInterval(
+        makeEnemy,
+        650
+    );
+
+
+    function loop(){
+
+        if(!running)
+            return;
+
+
+        var p=
+            player.getBoundingClientRect();
+
+
+        enemies.forEach(function(o,index){
+
+            o.y+=4;
+
+            o.el.style.top=
+                o.y+"px";
+
+
+            var r=
+                o.el.getBoundingClientRect();
+
+
+            if(
+                p.left<r.right &&
+                p.right>r.left &&
+                p.top<r.bottom &&
+                p.bottom>r.top
+            ){
+
+                running=false;
+
+                clearInterval(spawn);
+
+
+                gameBox.innerHTML=
+
+                    '<h2>💥 Game Over</h2>'+
+                    '<p>Score: '+score+'</p>'+
+                    '<button class="play" id="again">Play Again</button>';
+
+
+                document.getElementById("again").onclick=function(){
+
+                    openGame({
+                        id:"dodge",
+                        name:"Dodge"
+                    });
+
+                };
+
+                return;
+
+            }
+
+
+            if(o.y>arena.clientHeight){
+
+                o.el.remove();
+
+                enemies.splice(index,1);
+
+                score++;
+
+                document.getElementById("ds").textContent=score;
+
+            }
+
+        });
+
+
+        frame=
+            requestAnimationFrame(loop);
+
+    }
+
+
+    frame=
+        requestAnimationFrame(loop);
+
+
+    return function(){
+
+        running=false;
+
+        clearInterval(spawn);
+
+        cancelAnimationFrame(frame);
+
+    };
+
+}
+
+
+/* =====================================================
+   MATH
+   ===================================================== */
+
+function mathGame(){
+
+    var q=0;
+    var score=0;
+
+
+    function next(){
+
+        if(q>=10){
+
+            gameBox.innerHTML=
+
+                '<h2>🎉 Finished!</h2>'+
+                '<p>Your Score: '+score+'/10</p>'+
+                '<button class="play" id="again">Play Again</button>';
+
+
+            document.getElementById("again").onclick=function(){
+
+                openGame({
+                    id:"math",
+                    name:"Math Rush"
+                });
+
+            };
+
+            return;
+        }
+
+
+        q++;
+
+
+        var a=
+            Math.floor(
+                Math.random()*20
+            )+1;
+
+
+        var b=
+            Math.floor(
+                Math.random()*20
+            )+1;
+
+
+        var ops=[
+            "+",
+            "-",
+            "×"
+        ];
+
+
+        var op=
+            ops[
+                Math.floor(
+                    Math.random()*3
+                )
+            ];
+
+
+        var ans;
+
+
+        if(op==="+")
+            ans=a+b;
+
+        if(op==="-")
+            ans=a-b;
+
+        if(op==="×")
+            ans=a*b;
+
+
+        var options=[
+            ans,
+            ans+3,
+            ans-2,
+            ans+7
+        ];
+
+
+        options.sort(function(){
+
+            return Math.random()-.5;
+
+        });
+
+
+        gameBox.innerHTML=
+
+            '<h2>➗ Math Rush</h2>'+
+            '<p>Question '+q+' / 10</p>'+
+            '<div style="font-size:38px;font-weight:bold;margin:30px">'+
+            a+" "+op+" "+b+" = ?"+
+            '</div>'+
+            '<div class="answers" id="answers"></div>'+
+            '<div class="score">Score: '+score+'</div>';
+
+
+        var box=
+            document.getElementById("answers");
+
+
+        options.forEach(function(n){
+
+            var btn=
+                document.createElement("button");
+
+            btn.className="answer";
+
+            btn.textContent=n;
+
+
+            btn.onclick=function(){
+
+                if(n===ans)
+                    score++;
+
+                next();
+
+            };
+
+
+            box.appendChild(btn);
+
+        });
+
+    }
+
+
+    next();
+
+
+    return function(){};
+
+}
+
+
+/* =====================================================
+   GUESS
+   ===================================================== */
+
+function guessGame(){
+
+    var secret=
+        Math.floor(
+            Math.random()*100
+        )+1;
+
+    var tries=0;
+
+
+    gameBox.innerHTML=
+
+        '<h2>🔢 Guess Number</h2>'+
+        '<p>1 से 100 के बीच number guess करो.</p>'+
+
+        '<input class="guess" id="guessInput" type="number" placeholder="Enter number">'+
+
+        '<button class="play" id="guessBtn">Guess</button>'+
+
+        '<div class="score" id="result">Good luck! 🎯</div>';
+
+
+    var input=
+        document.getElementById("guessInput");
+
+    var btn=
+        document.getElementById("guessBtn");
+
+    var result=
+        document.getElementById("result");
+
+
+    btn.onclick=function(){
+
+        var n=Number(input.value);
+
+
+        if(n<1||n>100){
+
+            result.textContent=
+                "1 से 100 के बीच number डालो.";
+
+            return;
+
+        }
+
+
+        tries++;
+
+
+        if(n===secret){
+
+            gameBox.innerHTML=
+
+                '<h2>🎉 Correct!</h2>'+
+                '<p>'+tries+' attempts लगे.</p>'+
+                '<button class="play" id="again">Play Again</button>';
+
+
+            document.getElementById("again").onclick=function(){
+
+                openGame({
+                    id:"guess",
+                    name:"Guess Number"
+                });
+
+            };
+
+        }else if(n<secret){
+
+            result.textContent=
+                "⬆️ बड़ा number try करो.";
+
+        }else{
+
+            result.textContent=
+                "⬇️ छोटा number try करो.";
+
+        }
+
+
+        input.value="";
+
+    };
+
+
+    input.onkeydown=function(e){
+
+        if(e.key==="Enter")
+            btn.click();
+
+    };
+
+
+    return function(){};
+
+}
+
+
+/* =====================================================
+   MEMORY
+   ===================================================== */
+
+function memoryGame(){
+
+    var icons=[
+        "🍎","🍌","🍇","🍉",
+        "🥝","🍓","🥭","🍒"
+    ];
+
+
+    var cards=
+        icons.concat(icons);
+
+
+    cards.sort(function(){
+
+        return Math.random()-.5;
+
+    });
+
+
+    var first=null;
+    var lock=false;
+    var matched=0;
+
+
+    gameBox.innerHTML=
+
+        '<h2>🃏 Memory</h2>'+
+        '<p>Same cards match करो.</p>'+
+        '<div class="memory" id="memory"></div>';
+
+
+    var grid=
+        document.getElementById("memory");
+
+
+    cards.forEach(function(icon){
+
+        var btn=
+            document.createElement("button");
+
+        btn.textContent="?";
+
+        btn.dataset.icon=icon;
+
+
+        btn.onclick=function(){
+
+            if(lock)
+                return;
+
+            if(btn.classList.contains("open"))
+                return;
+
+
+            btn.classList.add("open");
+
+            btn.textContent=icon;
+
+
+            if(!first){
+
+                first=btn;
+
+                return;
+
+            }
+
+
+            if(
+                first.dataset.icon===
+                btn.dataset.icon
+            ){
+
+                matched++;
+
+                first=null;
+
+
+                if(matched===8){
+
+                    setTimeout(function(){
+
+                        gameBox.innerHTML=
+
+                            '<h2>🎉 You Won!</h2>'+
+                            '<button class="play" id="again">Play Again</button>';
+
+
+                        document.getElementById("again").onclick=function(){
+
+                            openGame({
+                                id:"memory",
+                                name:"Memory"
+                            });
+
+                        };
+
+                    },400);
+
+                }
+
+            }else{
+
+                lock=true;
+
+                var old=first;
+
+
+                setTimeout(function(){
+
+                    old.classList.remove("open");
+                    old.textContent="?";
+
+                    btn.classList.remove("open");
+                    btn.textContent="?";
+
+                    first=null;
+
+                    lock=false;
+
+                },700);
+
+            }
+
+        };
+
+
+        grid.appendChild(btn);
+
+    });
+
+
+    return function(){};
+
+}
+
+
+/* =====================================================
+   TAP
+   ===================================================== */
+
+function tapGame(){
+
+    var taps=0;
+    var time=10;
+    var started=false;
+    var timer;
+
+
+    gameBox.innerHTML=
+
+        '<h2>👆 Tap Fast</h2>'+
+        '<p>10 seconds में जितना fast tap करो!</p>'+
+
+        '<div class="score">'+
+        'Taps: <span id="tapScore">0</span> | '+
+        'Time: <span id="tapTime">10</span>'+
+        '</div>'+
+
+        '<div class="tap" id="tapZone">TAP!</div>';
+
+
+    var zone=
+        document.getElementById("tapZone");
+
+
+    zone.onpointerdown=function(){
+
+        if(!started){
+
+            started=true;
+
+
+            timer=setInterval(function(){
+
+                time--;
+
+
+                document.getElementById(
+                    "tapTime"
+                ).textContent=time;
+
+
+                if(time<=0){
+
+                    clearInterval(timer);
+
+                    zone.style.pointerEvents=
+                        "none";
+
+
+                    zone.innerHTML=
+
+                        '<div>'+
+                        taps+
+                        ' TAPS<br><br>'+
+                        '<button class="play" id="again">Play Again</button>'+
+                        '</div>';
+
+
+                    document.getElementById("again").onclick=function(){
+
+                        openGame({
+                            id:"tap",
+                            name:"Tap Fast"
+                        });
+
+                    };
+
+                }
+
+            },1000);
+
+        }
+
+
+        if(time>0){
+
+            taps++;
+
+            document.getElementById(
+                "tapScore"
+            ).textContent=taps;
+
+        }
+
+    };
+
+
+    return function(){
+
+        clearInterval(timer);
+
+    };
+
+}
+
+})();
+
+</script>
+
+</body>
+</html>
